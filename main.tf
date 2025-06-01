@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
 }
 
 resource "aws_vpc" "devops_vpc" {
@@ -14,7 +14,7 @@ resource "aws_subnet" "devops_subnet" {
   count = 2
   vpc_id                  = aws_vpc.devops_vpc.id
   cidr_block              = cidrsubnet(aws_vpc.devops_vpc.cidr_block, 8, count.index)
-  availability_zone       = element(["us-west-2a", "us-west-2b"], count.index)
+  availability_zone       = element(["us-east-1a", "us-east-1b"], count.index)
   map_public_ip_on_launch = true
 
   tags = {
